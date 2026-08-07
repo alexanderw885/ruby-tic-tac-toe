@@ -17,6 +17,7 @@ class State
       next unless input
 
       success = @board.place_marker(@players[@current_player], input)
+      print 'Cannot play at that square. Try again\n' unless success
     end
   end
 
