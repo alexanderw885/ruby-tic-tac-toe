@@ -1,21 +1,24 @@
+# frozen_string_literal: true
+
 class Board
   def initialize
     @state = Array.new(3)
     @state.map! { Array.new(3, ' ') }
   end
 
-  def place_marker(player_id, row, col)
-    return false unless @state[row][col].eql?(' ')
+  def place_marker(player, coords)
+    return false unless @state[coords[0]][coords[1]].eql?(' ')
 
-    @state[row][col] = player_id.to_s
+    @state[coords[0]][coords[1]] = player.id.to_s
     true
   end
 
   def to_s
-    out = "\n"
+    out = "   1   2   3 \n\n"
     @state.each_with_index do |row, i|
-      out += " #{row.join(' | ')}\n"
-      out += "---+---+---\n" if i < 2
+      letter = (i + 65).chr
+      out += "#{letter}  #{row.join(' | ')}\n"
+      out += "  ---+---+---\n" if i < 2
     end
     out += "\n"
     out
